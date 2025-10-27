@@ -1,0 +1,102 @@
+# =========================
+# ОБЩИЕ НАСТРОЙКИ (для всех профилей)
+# =========================
+spring:
+  application:
+    name: eureka-config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/iarut/spring_cloud_config_repo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  app:
+    name: Eureka + Config Server
+    version: 1.0.0
+    description: Объединённый Eureka и Config Server
+
+# =========================
+# ПРОФИЛЬ: standalone
+# =========================
+---
+spring:
+  config:
+    activate:
+      on-profile: standalone
+server:
+  port: 9000
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:9000/eureka/
+#
+## =========================
+## ПРОФИЛЬ: united-states
+## =========================
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: united-states
+#server:
+#  port: 9001
+#eureka:
+#  instance:
+#    hostname: my-eureka-server-us.com
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://my-eureka-server-fr.com:9002/eureka/,http://my-eureka-server-vn.com:9003/eureka/
+#
+## =========================
+## ПРОФИЛЬ: france
+## =========================
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: france
+#server:
+#  port: 9002
+#eureka:
+#  instance:
+#    hostname: my-eureka-server-fr.com
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://my-eureka-server-us.com:9001/eureka/,http://my-eureka-server-vn.com:9003/eureka/
+#
+## =========================
+## ПРОФИЛЬ: vietnam
+## =========================
+#---
+#spring:
+#  config:
+#    activate:
+#      on-profile: vietnam
+#server:
+#  port: 9003
+#eureka:
+#  instance:
+#    hostname: my-eureka-server-vn.com
+#  client:
+#    registerWithEureka: true
+#    fetchRegistry: true
+#    serviceUrl:
+#      defaultZone: http://my-eureka-server-us.com:9001/eureka/,http://my-eureka-server-fr.com:9002/eureka/
